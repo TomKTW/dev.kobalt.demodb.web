@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<machine id="ibm5170" type="pcx86" border="1" pos="center" background="default">
+	<computer id="at-vga-2048k" name="IBM PC AT" buswidth="24" resume="0"/>
+	<ram id="ramLow" addr="0x00000" test="false" size="0xa0000" comment="ROM BIOS memory test has been disabled"/>
+	<ram id="ramExt" addr="0x100000" size="0x160000" comment=""/>
+	<rom id="romBIOS" addr="0xf0000" size="0x10000" alias="0xff0000" file="../../demo/pcx86/ATBIOS-REV3.json"/>
+	<video id="videoVGA" model="vga" screenWidth="720" screenHeight="400" touchScreen="mouse" autoLock="true" pos="center" padding="8px">
+		<menu>
+			<control type="container" pos="right">
+				<control type="led" label="Caps" binding="caps-lock" padLeft="8px"/>
+				<control type="led" label="Num" binding="num-lock" padLeft="8px"/>
+				<control type="led" label="Scroll" binding="scroll-lock" padLeft="8px"/>
+				<control type="button" binding="fullScreen" padLeft="8px;line-height:1em">Full Screen</control>
+			</control>
+		</menu>
+		<rom id="romVGA" addr="0xc0000" size="0x6000" file="../../demo/pcx86/ibm-vga.json" notify="videoVGA[0x378d,0x3f8d]"/>
+	</video>
+	<hdc id="hdcAT" type="AT">
+		<!--<control type="button" binding="saveHD0" padLeft="8px" padBottom="8px" padRight="8px">Save HD</control> -->
+	</hdc>
+	<fdc id="fdcNEC" pos="left">
+       <!--<control type="container">
+            <control type="list" binding="listDrives"/>
+            <control type="list" binding="listDisks"/>
+			<control type="button" binding="loadDisk">Load</control>
+			<control type="button" binding="saveDisk" padRight="8px">Save</control>
+			<control type="description" binding="descDisk" padRight="8px"/>
+			<control type="file" binding="mountDisk"/>
+        </control>-->
+    </fdc>
+	<keyboard ref="../../demo/pcx86/us84-softkeys.xml"/>
+	<cpu id="cpu286" model="80286" cycles="8000000" pos="right" padRight="8px" padBottom="8px">
+		<control type="button" binding="run">Run</control>
+		<control type="button" binding="reset">Reset</control>
+		<control type="button" binding="setSpeed">Speed</control>
+	</cpu>
+	<chipset id="chipset" model="5170" floppies="[1440,1200]"/>
+	<serial id="com1" adapter="1"/>
+	<mouse serial="com1"/>
+</machine>
